@@ -65,4 +65,13 @@ app.get('/menu', (req, res) => {
   res.render('menu', { menu: RESTAURANT.menu });
 });
 
+
+app.get('/menu/:category', (req, res) => {
+  const categoryParam = req.params.category;
+  const menuItems = RESTAURANT.menu.filter(item => item.category === categoryParam);
+  // Capitalize first letter for UI
+  const category = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
+  res.render('category', { menuItems, category });
+});
+
 app.listen(3000);
